@@ -1,0 +1,53 @@
+{
+    "name": "ramon/auth-modals",
+    "version": "0.1.0",
+    "description": "Redesigns Flarum's login, sign-up and forgot-password modals with a side panel (image + icon) and adds Login / Sign Up pill buttons to the header.",
+    "keywords": [
+        "flarum",
+        "auth",
+        "login",
+        "signup",
+        "modal"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ramon Guilherme",
+            "email": "ramon@ramonguilherme.com.br",
+            "homepage": "https://ramonguilherme.com.br",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "flarum/core": "^2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ramon\\AuthModals\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Auth Modals",
+            "category": "feature",
+            "icon": {
+                "image": "icon.svg"
+            }
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": true,
+                "forum": true,
+                "js": true,
+                "jsCommon": false,
+                "css": true,
+                "gitConf": true,
+                "prettier": true,
+                "typescript": true,
+                "backendTesting": false,
+                "editorConfig": true
+            }
+        }
+    }
+}

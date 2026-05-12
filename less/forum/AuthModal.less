@@ -1,0 +1,193 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Auth Modals – Side panel for Login / Sign Up / Forgot Password
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// The override in js/src/forum/index.tsx prepends .AuthModals-formIcon and
+// .AuthModals-panel to the modal's content().  We turn .Modal-content into
+// a relative container: panel pinned right (image / brand), form on the left.
+//
+
+// ─── Modal backdrop: align to top on short viewports so modal never clips ─────
+.Modal-backdrop {
+  pointer-events: none;
+}
+
+// Only when modal is actually open with content, restore native behavior.
+.Modal-backdrop:has(.Modal-content) {
+  pointer-events: auto;
+}
+
+@media @phone {
+  // On mobile the modal is shorter (no side panel), so center it like Flarum default.
+  .Modal-backdrop:has(.AuthModals-panel) {
+    align-items: center !important;
+    padding: 12px 0 !important;
+  }
+}
+
+// ─── Side-panel ───────────────────────────────────────────────────────────────
+
+.AuthModals-panel {
+  display: none; // hidden on mobile by default
+  position: relative;
+  flex-shrink: 0;
+  width: 300px;
+  min-height: 420px;
+  border-radius: 0 @border-radius @border-radius 0;
+  overflow: hidden;
+  background: linear-gradient(145deg, var(--primary-color) 0%, color-mix(in srgb, var(--primary-color) 65%, #000) 100%);
+
+  // Decorative circle blobs
+  &::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    right: -70px;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.10);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    pointer-events: none;
+  }
+}
+
+.AuthModals-panelOverlay {
+  position: absolute;
+  inset: 0;
+  background: var(--primary-color);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+// ─── Modal layout when panel is present ──────────────────────────────────────
+
+.Modal-content:has(.AuthModals-panel) {
+  position: relative;
+  overflow: hidden;
+  border-radius: @border-radius;
+  padding: 10px 8px 28px 32px;
+  box-sizing: border-box;
+  background: var(--control-bg);
+}
+
+// ─── Panel pinned to the right on tablet+ ────────────────────────────────────
+
+@media @tablet-up {
+  .AuthModals-panel {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+    border-radius: 0 @border-radius @border-radius 0;
+    overflow: hidden;
+  }
+
+  // Make room for the panel on the right (380px panel + 28px inner margin)
+  .Modal-content:has(.AuthModals-panel) {
+    padding-right: 408px;
+    max-height: calc(100vh - 60px) !important;
+    overflow: hidden !important;
+  }
+}
+
+// ─── Form icon (lock / user-plus / envelope) ──────────────────────────────────
+
+.AuthModals-formIcon {
+  position: absolute;
+  top: 32px;
+  left: 28px;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+// ─── Wider modal to accommodate panel + form ─────────────────────────────────
+// Flarum's .Modal--small caps .Modal-dialog at 375px. Override via :has().
+
+@media @tablet-up {
+  .LogInModal:has(.AuthModals-panel) .Modal-dialog,
+  .SignUpModal:has(.AuthModals-panel) .Modal-dialog,
+  .ForgotPasswordModal:has(.AuthModals-panel) .Modal-dialog,
+  .LogInModal:has(.AuthModals-panel),
+  .SignUpModal:has(.AuthModals-panel),
+  .ForgotPasswordModal:has(.AuthModals-panel) {
+    max-width: 860px !important;
+    width: 92vw !important;
+  }
+}
+
+// ─── Mobile: modal adapts to small screens ────────────────────────────────────
+
+@media @phone {
+  // Constrain dialog to viewport width with margin
+  .LogInModal .Modal-dialog,
+  .SignUpModal .Modal-dialog,
+  .ForgotPasswordModal .Modal-dialog {
+    width: calc(100vw - 24px) !important;
+    max-width: 100% !important;
+    margin: 12px auto !important;
+  }
+
+  // Ensure the modal fills well on very small screens (e.g. 320px)
+  .Modal--small .Modal-dialog,
+  .LogInModal.Modal--small .Modal-dialog,
+  .SignUpModal.Modal--small .Modal-dialog,
+  .ForgotPasswordModal.Modal--small .Modal-dialog {
+    width: calc(100vw - 24px) !important;
+    min-width: 0 !important;
+  }
+
+  // On mobile: icon centered in-flow, below the absolute Modal-header.
+  .AuthModals-formIcon {
+    position: static;
+    display: flex;
+    margin: 0 auto 20px;
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+    border-radius: 14px;
+  }
+
+  // padding-top = header height (~72px) + small gap (6px) = 78px
+  .Modal-content:has(.AuthModals-panel) {
+    padding: 78px 20px 28px !important;
+  }
+}
+
+// ─── LogIn provider buttons (passkey, GitHub, Google, …) ─────────────────────
+// .LogInButton extends .Button--block (display:flex, width:100%) and the .Button
+// rule sets justify-content:center. With the wider auth modal the icon ends up
+// pinned left while the label sits centered, leaving a large gap between them.
+// Force icon + label to sit adjacent and centered as a group.
+
+.LogInButton.hasIcon {
+  justify-content: center;
+  gap: 8px;
+
+  .Button-icon {
+    margin-right: 0; // override core's 5px (we use gap instead)
+  }
+}

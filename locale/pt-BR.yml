@@ -1,0 +1,15 @@
+ramon-auth-modals:
+  admin:
+    settings:
+      section_image: Imagem dos modais
+      section_header: Botões do header
+
+      image_label: Imagem do modal de autenticação
+      image_help: Imagem de fundo exibida no painel direito dos modais de login, cadastro e redefinição de senha.
+
+      show_header_buttons_label: Mostrar botões Entrar / Cadastrar no header para visitantes
+      show_header_buttons_help: Exibir botões de Entrar e Cadastrar no menu secundário do header para usuários não logados.
+
+  forum:
+    header:
+      or: "ou"

@@ -1,0 +1,13 @@
+// ─── Dark mode adjustments ───────────────────────────────────────────────────
+
+[data-theme^=dark] {
+  // Auth modal close button: subtle dark surface instead of light shadow.
+  .Modal-content:has(.AuthModals-panel) .Modal-close {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+}

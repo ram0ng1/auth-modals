@@ -1,0 +1,90 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Auth Modals – Admin settings page
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Card layout for each setting group
+.AuthModals-card {
+  border: 1px solid var(--control-bg-dark, #e8e8ed);
+  border-radius: 12px;
+  background: var(--body-bg);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.AuthModals-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--control-bg-dark, #e8e8ed);
+  background: var(--control-bg);
+}
+
+.AuthModals-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--primary-color) 14%, transparent);
+  color: var(--primary-color);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.AuthModals-card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.AuthModals-card-body {
+  padding: 18px;
+
+  .Form-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.AuthModals-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 6px;
+}
+
+.AuthModals-toggle {
+  margin-bottom: 0;
+}
+
+// Constrain the upload preview so a big background image doesn't dominate
+// the settings page — show it at a thumbnail-friendly size.
+.AuthModals-card-body .UploadImageButton {
+  &-image {
+    max-width: 280px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--control-bg-dark, #e8e8ed);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 160px;
+      object-fit: cover;
+    }
+  }
+}
+
+// Dark mode tweaks (Flarum's --control-bg-dark already adapts, but borders
+// look better with a softer tint in dark mode).
+[data-theme^=dark] {
+  .AuthModals-card,
+  .AuthModals-card-header {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}

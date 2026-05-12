@@ -1,0 +1,26 @@
+<svg class="w-[48px] h-[48px]" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" fill="white"/>
+  <g transform="translate(0,1)">
+    <!-- Shackle: dark outline (back layer) -->
+    <path d="M16.5 22V16.5C16.5 12.3579 19.8579 9 24 9C28.1421 9 31.5 12.3579 31.5 16.5V22H28.5V16.5C28.5 14.0147 26.4853 12 24 12C21.5147 12 19.5 14.0147 19.5 16.5V22H16.5Z" fill="#244C4E"/>
+
+    <!-- Body: dark green base (largest, offset bottom-right) -->
+    <path d="M13 22.5C13 21.1193 14.1193 20 15.5 20H32.5C33.8807 20 35 21.1193 35 22.5V37C35 39.7614 32.7614 42 30 42H18C15.2386 42 13 39.7614 13 37V22.5Z" fill="#337D63"/>
+
+    <!-- Body: medium green (offset up-left) -->
+    <path d="M11.5 21.5C11.5 20.1193 12.6193 19 14 19H31C32.3807 19 33.5 20.1193 33.5 21.5V36C33.5 38.7614 31.2614 41 28.5 41H16.5C13.7386 41 11.5 38.7614 11.5 36V21.5Z" fill="#89BA4F"/>
+
+    <!-- Body: light green (front highlight) -->
+    <path d="M10 20.5C10 19.1193 11.1193 18 12.5 18H29.5C30.8807 18 32 19.1193 32 20.5V35C32 37.7614 29.7614 40 27 40H15C12.2386 40 10 37.7614 10 35V20.5Z" fill="#9EEA6C"/>
+
+    <!-- Shackle: medium green outline (mid layer) -->
+    <path d="M15 21V15.5C15 11.3579 18.3579 8 22.5 8C26.6421 8 30 11.3579 30 15.5V21H27V15.5C27 13.0147 24.9853 11 22.5 11C20.0147 11 18 13.0147 18 15.5V21H15Z" fill="#337D63"/>
+
+    <!-- Shackle: light green (front) -->
+    <path d="M13.5 20V14.5C13.5 10.3579 16.8579 7 21 7C25.1421 7 28.5 10.3579 28.5 14.5V20H25.5V14.5C25.5 12.0147 23.4853 10 21 10C18.5147 10 16.5 12.0147 16.5 14.5V20H13.5Z" fill="#89BA4F"/>
+
+    <!-- Keyhole (the "pit" — dark brown accent like the avocado pit) -->
+    <circle cx="21" cy="27" r="2.8" fill="#804B35"/>
+    <path d="M19.7 28.4L18.9 32.6C18.8 33.1 19.2 33.5 19.7 33.5H22.3C22.8 33.5 23.2 33.1 23.1 32.6L22.3 28.4H19.7Z" fill="#804B35"/>
+  </g>
+</svg>
