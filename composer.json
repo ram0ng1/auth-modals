@@ -1,6 +1,5 @@
 {
     "name": "ramon/auth-modals",
-    "version": "2.0.0",
     "description": "Redesigns Flarum's login, sign-up and forgot-password modals with a side panel (image + icon) and adds Login / Sign Up pill buttons to the header.",
     "keywords": [
         "flarum",
