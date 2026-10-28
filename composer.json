@@ -10,6 +10,7 @@
     ],
     "type": "flarum-extension",
     "license": "MIT",
+    "homepage": "https://github.com/ram0ng1/auth-modals",
     "authors": [
         {
             "name": "Ramon Guilherme",
@@ -18,12 +19,35 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/ram0ng1/auth-modals/issues",
+        "source": "https://github.com/ram0ng1/auth-modals"
+    },
+    "funding": [
+        {
+            "type": "website",
+            "url": "https://donate.stripe.com/fZe5o66nebkf39S28a"
+        }
+    ],
     "require": {
+        "php": "^8.3",
         "flarum/core": "^2.0.0"
+    },
+    "require-dev": {
+        "flarum/phpstan": "^2.0",
+        "flarum/testing": "^2.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5 || ^12.5.22 || ^13.2.0",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
             "Ramon\\AuthModals\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ramon\\AuthModals\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -44,9 +68,33 @@
                 "gitConf": true,
                 "prettier": true,
                 "typescript": true,
-                "backendTesting": false,
-                "editorConfig": true
+                "backendTesting": true,
+                "editorConfig": true,
+                "locale": true
             }
         }
-    }
+    },
+    "scripts": {
+        "analyse:phpstan": "phpstan analyse --memory-limit=2G",
+        "clear-cache:phpstan": "phpstan clear-result-cache",
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "phpunit -c tests/phpunit.unit.xml",
+        "test:integration": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit -c tests/phpunit.integration.xml"
+        ],
+        "test:setup": "@php tests/integration/setup.php"
+    },
+    "scripts-descriptions": {
+        "analyse:phpstan": "Run static analysis",
+        "test": "Runs all tests.",
+        "test:unit": "Runs all unit tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once."
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

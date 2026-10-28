@@ -1,21 +1,26 @@
 {
-    "name": "@ramon/auth-modals",
-    "version": "0.1.0",
-    "private": true,
-    "prettier": "@flarum/prettier-config",
-    "devDependencies": {
-        "@flarum/prettier-config": "^1.0.0",
-        "flarum-tsconfig": "^2.0.0",
-        "flarum-webpack-config": "^3.0.3",
-        "prettier": "^2.5.1",
-        "typescript": "^4.5.4",
-        "webpack": "^5.65.0",
-        "webpack-cli": "^4.9.1"
-    },
-    "scripts": {
-        "dev": "webpack --mode development --watch",
-        "build": "webpack --mode production",
-        "format": "prettier --write src",
-        "format-check": "prettier --check src"
-    }
+  "name": "@ramon/auth-modals",
+  "description": "Side panel for the login, sign-up and forgot-password modals, and header buttons for guests.",
+  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@flarum/prettier-config": "^1.0.0",
+    "cross-env": "^10.1.0",
+    "flarum-tsconfig": "^2.0.0",
+    "flarum-webpack-config": "^3.1.0",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
+    "webpack": "^5.112.1",
+    "webpack-cli": "^7.2.3"
+  },
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "analyze": "cross-env ANALYZER=true npm run build",
+    "format": "prettier --write src",
+    "format-check": "prettier --check src",
+    "check-typings": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "prettier": "@flarum/prettier-config"
 }

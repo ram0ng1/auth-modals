@@ -12,8 +12,8 @@
 namespace Ramon\AuthModals;
 
 use Flarum\Extend;
-use Ramon\AuthModals\Controller\DeleteAuthImageController;
-use Ramon\AuthModals\Controller\UploadAuthImageController;
+use Ramon\AuthModals\Api\Controller\DeleteAuthImageController;
+use Ramon\AuthModals\Api\Controller\UploadAuthImageController;
 
 return [
     (new Extend\Frontend('forum'))

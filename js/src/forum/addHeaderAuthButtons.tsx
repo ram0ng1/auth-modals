@@ -4,34 +4,21 @@ import HeaderSecondary from 'flarum/forum/components/HeaderSecondary';
 import type ItemList from 'flarum/common/utils/ItemList';
 import type Mithril from 'mithril';
 
-import { settingEnabled, trans } from './utils';
+// Mesmo jeito do core: o modal é um chunk carregado sob demanda.
+const showModal = (id: string) => () => app.modal.show(() => flarum.reg.asyncModuleImport(id) as Promise<any>);
 
 /**
- * Open a Flarum 2.0 code-split modal by name. Mirrors Flarum's own pattern:
- * `app.modal.show()` accepts a thunk returning a promise resolving to a
- * component constructor.
- */
-const showModal = (id: string) => () =>
-  app.modal.show(() => flarum.reg.asyncModuleImport(id) as Promise<any>);
-
-/**
- * Replace the default `signUp` / `logIn` HeaderSecondary items with pill-style
- * buttons and inject an "or" separator between them. Only renders when the
- * setting is enabled AND the visitor is a guest.
+ * Troca os itens `signUp` e `logIn` do header por botões em pílula, com um
+ * "ou" entre eles. Só para visitantes e com a opção ligada no admin.
  */
 export default function addHeaderAuthButtons(): void {
   extend(HeaderSecondary.prototype, 'items', function (items: ItemList<Mithril.Children>) {
-    if (!settingEnabled('authModalsShowHeaderButtons', false) || app.session.user) return;
+    if (!app.forum.attribute<boolean>('authModalsShowHeaderButtons') || app.session.user) return;
 
-    // Flarum 2.0 ItemList uses setContent() — replace() does not exist.
-    // Keys: 'signUp' (capital U) and 'logIn'.
     if (items.has('signUp')) {
       items.setContent(
         'signUp',
-        <button
-          className="Button AuthModals-headerBtn AuthModals-headerBtn--signup"
-          onclick={showModal('flarum/forum/components/SignUpModal')}
-        >
+        <button className="Button AuthModals-headerBtn AuthModals-headerBtn--signup" onclick={showModal('flarum/forum/components/SignUpModal')}>
           <i className="fas fa-user-plus" aria-hidden="true" />
           {app.translator.trans('core.forum.header.sign_up_link')}
         </button>
@@ -41,10 +28,7 @@ export default function addHeaderAuthButtons(): void {
     if (items.has('logIn')) {
       items.setContent(
         'logIn',
-        <button
-          className="Button AuthModals-headerBtn AuthModals-headerBtn--login"
-          onclick={showModal('flarum/forum/components/LogInModal')}
-        >
+        <button className="Button AuthModals-headerBtn AuthModals-headerBtn--login" onclick={showModal('flarum/forum/components/LogInModal')}>
           <i className="fas fa-sign-in-alt" aria-hidden="true" />
           {app.translator.trans('core.forum.header.log_in_link')}
         </button>
@@ -52,10 +36,11 @@ export default function addHeaderAuthButtons(): void {
     }
 
     if (items.has('logIn') && items.has('signUp')) {
+      // Só visual: o leitor de tela já anuncia os dois botões.
       items.add(
         'authModalsSep',
-        <span className="AuthModals-headerSep">
-          {trans('ramon-auth-modals.forum.header.or', 'or')}
+        <span className="AuthModals-headerSep" aria-hidden="true">
+          {app.translator.trans('ramon-auth-modals.forum.header.or')}
         </span>,
         5
       );

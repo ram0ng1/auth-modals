@@ -1,10 +1,5 @@
-import app from 'flarum/admin/app';
-
-import addAuthModalsSettings from './addAuthModalsSettings';
 import addHideExtensionSubmitButton from './addHideExtensionSubmitButton';
 
-addHideExtensionSubmitButton();
+export { default as extend } from './extend';
 
-app.initializers.add('ramon-auth-modals', () => {
-  addAuthModalsSettings();
-});
+addHideExtensionSubmitButton();

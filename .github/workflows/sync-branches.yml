@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+# Default-deny no nível do workflow.
+permissions: {}
+
 concurrency:
   group: sync-branches
   cancel-in-progress: false
@@ -17,8 +20,17 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Harden-runner: job faz push em branches via GITHUB_TOKEN.
+      - name: Harden runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+            api.github.com:443
+
       - name: Checkout do repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -36,6 +48,8 @@ jobs:
             | grep -v 'HEAD' \
             | grep -v 'origin/main' \
             | grep -v 'origin/copilot/' \
+            | grep -v 'origin/dependabot/' \
+            | grep -v 'origin/claude/' \
             | sed 's|origin/||' \
             | tr -d ' ')
 
@@ -44,11 +58,16 @@ jobs:
 
             git checkout -B "$branch" "origin/$branch"
 
+            if ! git merge-base origin/main "origin/$branch" >/dev/null 2>&1; then
+              echo "⚠️  '$branch' não compartilha histórico com main (pré-reescrita) — pulando"
+              continue
+            fi
+
             if git merge origin/main --no-edit -m "chore: sync with main"; then
               git push origin "$branch"
               echo "✅ Branch '$branch' sincronizada com sucesso"
             else
               echo "⚠️  Conflito ao sincronizar '$branch' com main — pulando"
-              git merge --abort
+              git merge --abort 2>/dev/null || true
             fi
           done
