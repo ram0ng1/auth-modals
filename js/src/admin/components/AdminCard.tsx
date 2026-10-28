@@ -7,11 +7,6 @@ export interface IAdminCardAttrs extends ComponentAttrs {
   icon?: string;
 }
 
-/**
- * Card shell used to group a single setting in the admin page. The header
- * shows an optional Font Awesome icon next to the title; children render as
- * the card body.
- */
 export default class AdminCard<CustomAttrs extends IAdminCardAttrs = IAdminCardAttrs> extends Component<CustomAttrs> {
   view(vnode: Mithril.Vnode<CustomAttrs, this>): Mithril.Children {
     const { title, icon } = this.attrs;

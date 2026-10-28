@@ -1,9 +1,5 @@
-// Module + global augmentations for the Auth Modals extension.
-//
-// `flarum.reg` is provided by the runtime registry but isn't surfaced in
-// core's typings — we use `asyncModuleImport` to fetch Flarum 2.0 code-split
-// modal chunks at runtime.
-
+// `flarum.reg` existe em tempo de execução, mas os typings do core não o
+// expõem; o `asyncModuleImport` abre os modais, que são chunks sob demanda.
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace flarum {
