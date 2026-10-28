@@ -1,6 +1,4 @@
-// ─── Header auth buttons (Log In / Sign Up pills) ────────────────────────────
-// !important needed to override Flarum's .Button base styles injected via JS.
-
+// O `!important` vence os estilos do `.Button` do core.
 .AuthModals-headerBtn {
   display: inline-flex;
   align-items: center;
@@ -27,7 +25,8 @@
 
   &--signup {
     background: var(--primary-color) !important;
-    color: #fff !important;
+    // Branco some numa cor primária clara; o mesmo contraste do ícone do modal.
+    color: contrast(@primary-color, #333, #fff) !important;
     border: none !important;
 
     &:hover {
@@ -36,7 +35,6 @@
   }
 }
 
-// "or" separator between the two buttons
 .AuthModals-headerSep {
   font-size: 11px;
   color: var(--muted-color);
@@ -45,10 +43,8 @@
   opacity: 0.85;
 }
 
-// ─── Colored-header override ─────────────────────────────────────────────────
-// When the forum uses a colored header, --header-bg becomes the primary color
-// so the default primary-color buttons disappear. Switch to --header-color
-// (the contrasting text color Flarum assigns automatically).
+// Com o header colorido o fundo vira a cor primária, então os botões usam a
+// cor de texto que o core escolhe para o header.
 [data-colored-header=true] {
   .AuthModals-headerBtn--login {
     border-color: var(--header-color) !important;
