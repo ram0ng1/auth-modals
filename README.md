@@ -37,6 +37,7 @@
 ## Requirements
 
 - Flarum `^2.0.0`
+- PHP `^8.3`
 
 ## Installation
 
@@ -67,15 +68,22 @@ All settings are available in the admin panel under the Auth Modals extension:
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/api/auth-modals/image` | Upload the modal background image (admin only) |
+| `POST` | `/api/auth-modals/image` | Upload the modal background image (admin only; JPEG, PNG, GIF, WebP or BMP up to 8 MB, saved as WebP) |
 | `DELETE` | `/api/auth-modals/image` | Remove the modal background image (admin only) |
 
-## Build
+## Development
 
 ```sh
 cd js
 npm install
 npm run build
+```
+
+```sh
+composer install
+composer test:setup
+composer test
+composer analyse:phpstan
 ```
 
 ## Links
