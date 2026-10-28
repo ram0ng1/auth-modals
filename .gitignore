@@ -21,3 +21,7 @@ INDEX.md
 QUICK_REFERENCE.md
 FLARUM_CSS_FONTS_MANAGEMENT.md
 AGENT.md
+# Testes
+.phpunit.cache
+.phpunit.result.cache
+tests/integration/tmp
