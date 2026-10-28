@@ -30,26 +30,30 @@ categories:
   - title: '🔧 Manutenção'
     labels:
       - 'manutencao'
+# A versão dos releases é calculada no release-management.yml a partir da
+# última tag git (label "BC" => minor; qualquer outra => patch) e passada
+# explicitamente ao release-drafter via input `version`. Este resolver fica
+# como fallback/documentação e espelha a mesma regra — sem "major" automático.
 version-resolver:
-  major:
-    labels:
-      - 'BC'
   minor:
     labels:
-      - 'melhoria'
+      - 'BC'
   patch:
     labels:
+      - 'melhoria'
       - 'correcao'
+      - 'performance'
+      - 'documentacao'
+      - 'refatoracao'
+      - 'dependencias'
+      - 'traducao'
+      - 'manutencao'
   default: patch
-change-template: '- $TITLE (PR #$NUMBER) por @$AUTHOR'
+# Links absolutos: o texto do release também é colado fora do GitHub.
+change-template: '- $TITLE ([#$NUMBER]($URL)) por [@$AUTHOR](https://github.com/$AUTHOR)'
+# "Como atualizar" não fica aqui: o release-management.yml monta esse bloco e o
+# passa como `footer`, incluindo `php flarum migrate` só quando a versão traz
+# migração nova.
 template: |
   ## O que mudou na extensão Auth Modals 🌟
   $CHANGES
-
-  ## 📦 Como atualizar
-
-  ```bash
-  composer require ramon/auth-modals:$RESOLVED_VERSION
-  php flarum cache:clear
-  php flarum assets:publish
-  ```
