@@ -89,7 +89,9 @@ composer analyse:phpstan
 ## Links
 
 - [GitHub](https://github.com/ram0ng1/auth-modals)
+- [Releases](https://github.com/ram0ng1/auth-modals/releases)
 - [Issues](https://github.com/ram0ng1/auth-modals/issues)
+- [Security policy](SECURITY.md)
 - [Donate](https://donate.stripe.com/fZe5o66nebkf39S28a)
 
 ## Authors
